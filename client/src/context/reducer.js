@@ -1,5 +1,11 @@
 const reducer = (state, action) => {
     switch (action.type) {
+        case 'GET_TRANS':
+            return {
+                ...state,
+                transactions: action.payload
+            };
+            
         case 'DELETE_TRANS':
             return {
                 ...state,
