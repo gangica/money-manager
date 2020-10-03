@@ -37,11 +37,24 @@ export const StateProvider = ({ children }) => {
         })
     }
 
-    function addTransaction(transaction) {
-        dispatch({
-            type: 'ADD_TRANS',
-            payload: transaction
-        })
+    async function addTransaction(transaction) {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        console.log(transaction);
+        try {
+            const res = await axios.post('/api/v1/transactions', transaction, config);
+            console.log(res);
+            dispatch({
+                type: 'ADD_TRANS',
+                payload: res.data.data
+            })
+        } catch(error) {
+            console.log('error add');
+        }
+        
     }
 
     return (
