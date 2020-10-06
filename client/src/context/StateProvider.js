@@ -3,12 +3,6 @@ import reducer from './reducer';
 import axios from 'axios';
 
 const initialState = {
-    // transactions: [
-    //     { id: 1, type: 'income', name: 'Salary', date: '09-01', amount: 400 },
-    //     { id: 2, type: 'expense', name: 'Gym', date: '09-01', amount: -200 },
-    //     { id: 3, type: 'expense', name: 'PC', date: '09-01', amount: -150 },
-    //     { id: 4, type: 'expense', name: 'Grab', date: '09-01', amount: -15 },
-    // ]
     transactions: []
 }
 
@@ -30,11 +24,18 @@ export const StateProvider = ({ children }) => {
 
     }
 
-    function deleteTransaction(id) {
-        dispatch({
-            type: 'DELETE_TRANS',
-            payload: id
-        })
+    async function deleteTransaction(id) {
+        try {
+            await axios.delete(`/api/v1/transactions/${id}`);
+
+            dispatch({
+                type: 'DELETE_TRANS',
+                payload: id
+            })
+        } catch(error) {
+            console.log('error remove');
+        }
+        
     }
 
     async function addTransaction(transaction) {
@@ -43,10 +44,9 @@ export const StateProvider = ({ children }) => {
                 'Content-Type': 'application/json'
             }
         }
-        console.log(transaction);
+
         try {
             const res = await axios.post('/api/v1/transactions', transaction, config);
-            console.log(res);
             dispatch({
                 type: 'ADD_TRANS',
                 payload: res.data.data

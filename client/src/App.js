@@ -1,22 +1,31 @@
 import React from 'react';
-import Header from './components/Header';
-import Balance from './components/Balance';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import './App.css';
-import IncomeExpenses from './components/IncomeExpenses';
-import TransactionList from './components/TransactionList';
 import AddTransaction from './components/AddTransaction';
+import Main from './components/Main';
+import TransactionDetail from './components/TransactionDetail';
 import { StateProvider } from './context/StateProvider';
 
 function App() {
   return (
     <StateProvider>
-      <Header />
-      <div className="container">
-        <Balance />
-        <IncomeExpenses />
-        <TransactionList />
-        <AddTransaction />
-      </div>
+      <Router>
+        <div className="sidebar">
+          <div className="sidebar_header">
+            Menu
+        </div>
+        </div>
+        <Switch>
+          <Route path="/transaction" component={TransactionDetail}>
+          </Route>
+          <Route path="/add" component={AddTransaction}>
+          </Route>
+          <Route exact path="/">
+            <Main />
+          </Route>
+        </Switch>
+      </Router>
     </StateProvider>
   );
 }

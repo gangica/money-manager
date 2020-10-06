@@ -8,6 +8,11 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none !important;
+  color: black;
+}
+
 body {
   background-color: #f7f7f7;
   display: flex;
@@ -148,6 +153,21 @@ input[type='number'] {
 
 .list li:hover .delete-btn {
   opacity: 1;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    flex: 0.45;
+    font-family: 'Fira Sans'; 
+    background: rgb(223, 223, 223);
+}
+
+.sidebar_header {
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    border-right: 1px solid rgb(223, 223, 223);
 }
 
 @media (max-width: 320px) {

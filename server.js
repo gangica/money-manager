@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 const transactions = require('./routes/transactions');
 dotenv.config({ path: './config.env'});
 
-const PORT = process.env.PORT || 5000;
 const app = express();
+const PORT = process.env.PORT || 5000;
+
 app.use(express.json());
 
 // connect to mongodb
