@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { GlobalContext } from '../context/StateProvider';
+import Balance from './Balance';
 
 const IncomeExpenses = () => {
   const { transactions } = useContext(GlobalContext);
@@ -22,6 +23,7 @@ const IncomeExpenses = () => {
           <h4>Expense</h4>
           <p id="money-minus" className="money minus">{expense}</p>
       </div>
+      <Balance />
     </div>
   );
 }
