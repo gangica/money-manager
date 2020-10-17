@@ -61,3 +61,29 @@ exports.deleteTransactions = async (req, res, next) => {
         })
     }
 }
+
+// Edit transaction
+exports.editTransaction = async (req, res, next) => {
+    try {
+        const transaction = await Transaction.findById(req.params.id);
+
+        transaction.name = req.body.name;
+        transaction.type = req.body.type;
+        transaction.date = req.body.date;
+        transaction.category = req.body.category;
+        transaction.amount = req.body.amount;
+
+        await transaction.save();
+
+        return res.status(200).json({
+            success: true,
+            data: transaction
+        })
+
+    } catch(error) {
+        return res.status(500).json({
+            success: false,
+            error: 'Server error'
+        })
+    }
+}

@@ -8,7 +8,7 @@ const TransactionDetail = ({ location }) => {
             <h1>{category}</h1>
             <h3>{type}</h3>
             <h3>{name}</h3>
-            <h3>{date}</h3>
+            <h3>{date.substr(0,10)}</h3>
             <h3>{amount}</h3>
             <Link to={{ pathname: "/add", transaction: {...location.trans, status: "edit" }}}>
                 <button className="btn">Edit</button>

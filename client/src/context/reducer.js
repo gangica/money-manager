@@ -18,6 +18,12 @@ const reducer = (state, action) => {
                 transactions: [...state.transactions, action.payload]
             };
         
+        case 'UPDATE_TRANS':
+            return {
+                ...state,
+                transactions: state.transactions.map(transaction => (transaction._id === action.payload.id) && (transaction = action.payload.data))
+            }
+        
         default:
             return state;
     }

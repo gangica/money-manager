@@ -57,8 +57,21 @@ export const StateProvider = ({ children }) => {
         
     }
 
+    async function editTransaction(id, transaction) {
+        try {
+            const res = await axios.put(`/api/v1/transactions/${id}`, transaction);
+
+            dispatch({
+                type: 'UPDATE_TRANS',
+                payload: { id: id, data: res.data.data }
+            })
+        } catch(error) {
+            console.log('error update');
+        }
+    }
+
     return (
-        <GlobalContext.Provider value={{transactions, deleteTransaction, addTransaction, getTransactions}}>
+        <GlobalContext.Provider value={{transactions, deleteTransaction, addTransaction, getTransactions, editTransaction}}>
             {children}
         </GlobalContext.Provider>
     )

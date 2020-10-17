@@ -11,7 +11,7 @@ const Main = () => {
     const initTrans = {
         status: "add",
         name: "",
-        type: "",
+        type: "income",
         date: "",
         category: "",
         amount: 0
