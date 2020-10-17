@@ -12,7 +12,6 @@ function App() {
     <StateProvider>
       <Header />
       <div className="container">
-        <Balance />
         <IncomeExpenses />
         <TransactionList />
         <AddTransaction />
