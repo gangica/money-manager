@@ -17,6 +17,13 @@ const reducer = (state, action) => {
                 ...state,
                 transactions: [...state.transactions, action.payload]
             };
+
+        case 'FILTER_TRANS':
+            return {
+                ...state,
+                transactions: state.transactions.filter(
+                    transaction => transaction.date.slice(0,7) === action.payload)
+            }
         
         default:
             return state;

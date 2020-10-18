@@ -57,8 +57,15 @@ export const StateProvider = ({ children }) => {
         
     }
 
+    function filterTransaction(month) {
+        dispatch({
+            type: 'FILTER_TRANS',
+            payload: month
+        })
+    }
+
     return (
-        <GlobalContext.Provider value={{transactions, deleteTransaction, addTransaction, getTransactions}}>
+        <GlobalContext.Provider value={{transactions, deleteTransaction, addTransaction, getTransactions, filterTransaction}}>
             {children}
         </GlobalContext.Provider>
     )

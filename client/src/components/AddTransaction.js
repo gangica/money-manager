@@ -19,11 +19,12 @@ const AddTransaction = () => {
 
   const sendTransaction = (e) => {
     e.preventDefault();
+    console.log(date.toString());
     
     addTransaction({
       name,
       type,
-      date,
+      date: date.toString(),
       category,
       amount: (type === "income" ? Number(amount) : Number(0-amount))
     })

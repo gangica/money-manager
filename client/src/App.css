@@ -28,6 +28,10 @@ h1 {
   margin: 0;
 }
 
+h5 {
+  margin: 0
+}
+
 .inc-exp-container h4 {
   margin: 0
 }
@@ -47,6 +51,7 @@ h1 {
 
 .money {
   margin: 5px 0;
+  font-size: 20px;
 }
 
 .money.plus {
@@ -96,13 +101,17 @@ input[type='number'] {
   margin-bottom: 40px;
 }
 
-.list li {
+.sidebarUser {
   background-color: #fff;
   box-shadow: var(--box-shadow);
   color: #333;
   display: flex;
   justify-content: space-between;
   position: relative;
+  align-items: center;
+  padding: 18px;
+  cursor: pointer;
+  border-bottom: 1px solid #f6f6f6;
 }
 
 .list li.plus {
@@ -133,11 +142,12 @@ input[type='number'] {
   opacity: 1;
 }
 
-.sidebarUser {
-  display: flex;
-  padding: 20px;
-  cursor: pointer;
-  border-bottom: 1px solid #f6f6f6;
+.MuiSvgIcon-root {
+  fill: white !important;
+}
+
+.MuiIconButton-root {
+  padding: 10px;
 }
 
 .sidebarUser:hover {
@@ -152,6 +162,10 @@ input[type='number'] {
 
 .sidebarUser > span {
   padding: 10px 0
+}
+
+.sidebarUser_name > h4 {
+  margin: 0
 }
 
 .sidebarUser_name > p {
@@ -177,6 +191,8 @@ input[type='number'] {
 .sidebar_header {
   display: flex;
   align-items: center;
+  flex: 1;
+  margin-right: 10px
 }
 
 .username {
