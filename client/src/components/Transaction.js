@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { GlobalContext } from '../context/StateProvider';
+import { Avatar } from '@material-ui/core';
 
 const Transaction = ({ transaction }) => {
   const { name, date, amount, type, category, _id } = transaction; 
