@@ -11,6 +11,7 @@
 a {
   text-decoration: none !important;
   color: black;
+  margin: 0
 }
 
 body {
@@ -79,7 +80,7 @@ input[type='number'] {
 
 .btn {
   cursor: pointer;
-  background-color: #9c88ff;
+  background-color: #363636;
   box-shadow: var(--box-shadow);
   color: #fff;
   border: 0;
@@ -167,7 +168,6 @@ input[type='number'] {
 }
 
 .sidebarUser_name {
-  margin-left: 16px;
   flex: 1;
   text-align: left;
 }

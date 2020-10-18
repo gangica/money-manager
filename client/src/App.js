@@ -11,11 +11,6 @@ function App() {
   return (
     <StateProvider>
       <Router>
-        <div className="sidebar">
-          <div className="sidebar_header">
-            Menu
-        </div>
-        </div>
         <Switch>
           <Route path="/transaction" component={TransactionDetail}>
           </Route>

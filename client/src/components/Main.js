@@ -20,7 +20,6 @@ const Main = () => {
     return (
         <div className="container">
             <Header />
-            <Balance />
             <IncomeExpenses />
             <TransactionList />
             <Link to={{ pathname: "/add", transaction: initTrans}}>
