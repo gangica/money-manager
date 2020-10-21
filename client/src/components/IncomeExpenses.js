@@ -3,13 +3,13 @@ import { GlobalContext } from '../context/StateProvider';
 import Balance from './Balance';
 
 const IncomeExpenses = () => {
-  const { transactions } = useContext(GlobalContext);
+  const { dataToShow } = useContext(GlobalContext);
 
-  const income = transactions.filter(transaction => transaction.type === "income")
+  const income = dataToShow.filter(transaction => transaction.type === "income")
       .map(transaction => transaction.amount)
       .reduce((first, next) => (first += next), 0).toFixed(1);
 
-  const expense = transactions.filter(transaction => transaction.type === "expense")
+  const expense = dataToShow.filter(transaction => transaction.type === "expense")
       .map(transaction => transaction.amount)
       .reduce((first, next) => (first += next), 0).toFixed(1);
 

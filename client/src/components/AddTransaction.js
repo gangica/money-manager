@@ -1,7 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../context/StateProvider';
 import TextField from "@material-ui/core/TextField";
 import MenuItem from '@material-ui/core/MenuItem';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { IconButton } from '@material-ui/core';
 
 const AddTransaction = ({ location }) => {
   const { addTransaction, editTransaction } = useContext(GlobalContext);
@@ -49,8 +51,17 @@ const AddTransaction = ({ location }) => {
   }
 
   return (
-    <div>
-      <h3>Add Transaction</h3>
+    <div className="container">
+      <div className="sidebar">
+        <div className="sidebar_header">
+          <div className="username">
+            <h3>Add Transaction</h3>
+          </div>
+          <IconButton>
+            <MoreVertIcon />
+          </IconButton>
+        </div>
+      </div>
       <form onSubmit={e => sendTransaction(e)}>
         <div className="form-control">
           <TextField select label="Type" value={type} onChange={e => setType(e.target.value)}>

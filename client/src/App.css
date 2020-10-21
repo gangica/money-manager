@@ -75,12 +75,12 @@ label {
 
 input[type='text'],
 input[type='number'] {
-  border: 1px solid #dedede;
-  border-radius: 2px;
+  border: none;
   display: block;
   font-size: 16px;
   padding: 10px;
   width: 100%;
+  text-align: center;
 }
 
 .btn {
@@ -94,6 +94,8 @@ input[type='number'] {
   margin: 10px 0 30px;
   padding: 10px;
   width: 100%;
+  font-weight: bold;
+  font-family: inherit;
 }
 
 .btn:focus,
@@ -189,7 +191,6 @@ input[type='number'] {
 .sidebar {
   background-color: #363636;
   color: white;
-  display: flex;
   flex: 0.45;
 }
 
@@ -198,6 +199,31 @@ input[type='number'] {
   align-items: center;
   flex: 1;
   margin-right: 10px
+}
+
+.sidebar_search {
+  display: flex;
+  padding: 15px 0;
+  align-items: center;
+  text-align: center;
+}
+
+.sidebar_searchContainer {
+  align-items: center;
+  background-color: white;
+  width: 75%;
+  margin: 0 20px;
+  border-radius: 20px;
+}
+
+.sidebar_searchContainer > .MuiSvgIcon-root {
+  padding: 0 !important;
+  margin: 10px;
+}
+
+.sidebar_searchContainer > .MuiSvgIcon-root {
+  color: gray;
+  padding: 10px
 }
 
 .username {
@@ -210,5 +236,6 @@ input[type='number'] {
 @media (max-width: 600px) {
   .container {
     width: 100vw;
+    height: 100vh
   }
 }

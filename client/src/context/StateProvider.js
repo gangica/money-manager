@@ -3,13 +3,15 @@ import reducer from './reducer';
 import axios from 'axios';
 
 const initialState = {
-    transactions: []
+    transactions: [],
+    filterDate: false,
+    dataToShow: []
 }
 
 export const GlobalContext = createContext(initialState);
 
 export const StateProvider = ({ children }) => {
-    const [{ transactions }, dispatch] = useReducer(reducer, initialState);
+    const [{ transactions, dataToShow }, dispatch] = useReducer(reducer, initialState);
 
     async function getTransactions() {
         try {
@@ -70,15 +72,15 @@ export const StateProvider = ({ children }) => {
         }
     }
 
-    function filterTransaction(month) {
+    function filterTransaction(date) {
         dispatch({
             type: 'FILTER_TRANS',
-            payload: month
+            payload: date
         })
     }
 
     return (
-        <GlobalContext.Provider value={{transactions, deleteTransaction, addTransaction, getTransactions, editTransaction, filterTransaction}}>
+        <GlobalContext.Provider value={{transactions, dataToShow, deleteTransaction, addTransaction, getTransactions, editTransaction, filterTransaction}}>
             {children}
         </GlobalContext.Provider>
     )
