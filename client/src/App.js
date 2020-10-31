@@ -16,8 +16,7 @@ function App() {
           </Route>
           <Route path="/add" component={AddTransaction}>
           </Route>
-          <Route exact path="/">
-            <Main />
+          <Route exact path="/" component={Main}>
           </Route>
         </Switch>
       </Router>

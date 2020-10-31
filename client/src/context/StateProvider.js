@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const initialState = {
     transactions: [],
-    filterDate: false,
+    filterDate: new Date(),
     dataToShow: []
 }
 

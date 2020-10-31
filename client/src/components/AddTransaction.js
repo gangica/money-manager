@@ -1,9 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../context/StateProvider';
 import TextField from "@material-ui/core/TextField";
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+
+import { Link, useHistory } from 'react-router-dom';
 import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { IconButton } from '@material-ui/core';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const AddTransaction = ({ location }) => {
   const { addTransaction, editTransaction } = useContext(GlobalContext);
@@ -14,6 +20,12 @@ const AddTransaction = ({ location }) => {
   const [category, setCategory] = useState(transaction.category);
   const [amount, setAmount] = useState(transaction.amount);
   
+  const history = useHistory();
+
+  const routeChange = () =>{ 
+    history.push("/");
+  }
+
   const types = [
     {
       value: 'income',
@@ -46,14 +58,21 @@ const AddTransaction = ({ location }) => {
         amount: ((type === "income" || Number(amount) < 0) ? Number(amount) : Number(0 - amount))
       })
     }
-
-    reset();
+    routeChange();
   }
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      '& .MuiTextField-root': {
+      },
+    },
+  }));  
 
   return (
     <div className="container">
       <div className="sidebar">
         <div className="sidebar_header">
+          <Link to="/"><IconButton><ArrowBackIcon /></IconButton></Link>
           <div className="username">
             <h3>Add Transaction</h3>
           </div>
@@ -62,9 +81,11 @@ const AddTransaction = ({ location }) => {
           </IconButton>
         </div>
       </div>
-      <form onSubmit={e => sendTransaction(e)}>
-        <div className="form-control">
-          <TextField select label="Type" value={type} onChange={e => setType(e.target.value)}>
+      
+      <form className={useStyles().root} onSubmit={e => sendTransaction(e)}>
+        <div>
+          <InputLabel>Type</InputLabel>
+          <TextField select value={type} onChange={e => setType(e.target.value)}>
             {types.map((option) => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
@@ -72,19 +93,23 @@ const AddTransaction = ({ location }) => {
             ))}
           </TextField>
         </div>
-        <div className="form-control">
-          <TextField label="Category" value={category} onChange={e => setCategory(e.target.value)} />
+        <div>
+          <InputLabel>Category</InputLabel>
+          <Input required label="Category" value={category} onChange={e => setCategory(e.target.value)} />
         </div>
-        <div className="form-control">
-          <TextField label="Name" value={name} onChange={e => setName(e.target.value)} />
+        <div>
+          <InputLabel>Name</InputLabel>
+          <Input required label="Name" value={name} onChange={e => setName(e.target.value)} />
         </div>
-        <div className="form-control">
-          <TextField type="date" label="Date" defaultValue={date} onChange={e => setDate(e.target.value)} />
+        <div>
+          <InputLabel>Date</InputLabel>
+          <Input required type="date" label="Date" defaultValue={date} onChange={e => setDate(e.target.value)} />
         </div>
-        <div className="form-control">
-          <TextField label="Amount" value={amount} onChange={e => setAmount(e.target.value)} />
+        <div>
+          <InputLabel>Amount</InputLabel>
+          <Input required label="Amount" value={amount} onChange={e => setAmount(e.target.value)} />
         </div>
-        <button className="btn">{transaction.status === "add" ? "Add" : "Edit"}</button>
+        <button className="btn">{transaction.status === "add" ? "Add" : "Edit"}</button>  
       </form>
     </div>
   );

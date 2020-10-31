@@ -13,19 +13,20 @@ const Transaction = ({ transaction }) => {
   }
 
   return (
-    <Link to={{
-      pathname: "/transaction",
-      trans: { name, amount, date, type, category, _id }
-    }}>
-      <li className="sidebarUser">
+
+    <li className="sidebarUser">
+      <Link to={{
+        pathname: "/transaction",
+        trans: { name, amount, date, type, category, _id }
+      }}>
         <div className="sidebarUser_name">
           <h2>{name}</h2>
           <p>{formatDate(date)}</p>
           <p>description</p>
         </div>
-        <span className={amount > 0 ? "money plus" : "money minus"}>{amount}</span><button className="delete-btn" onClick={() => deleteTransaction(transaction.id)}>x</button>
-      </li>
-    </Link>
+      </Link>
+      <span className={amount > 0 ? "money plus" : "money minus"}>{amount}</span><button className="delete-btn" onClick={() => deleteTransaction(_id)}>x</button>
+    </li >
   );
 }
 

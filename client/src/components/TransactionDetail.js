@@ -1,10 +1,19 @@
 import React, { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { IconButton } from '@material-ui/core';
+import { GlobalContext } from '../context/StateProvider';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const TransactionDetail = ({ location }) => {
-    const { name, amount, type, category, date } = location.trans;
+    const { name, amount, type, category, date, _id } = location.trans;
+    const { deleteTransaction } = useContext(GlobalContext);
+
+    const history = useHistory();
+
+    const routeChange = () =>{ 
+      history.push("/");
+    }
 
     const formatDate = (date) => {
         let f = new Date(date);
@@ -15,6 +24,7 @@ const TransactionDetail = ({ location }) => {
         <div className="container">
             <div className="sidebar">
                 <div className="sidebar_header">
+                    <Link to="/"><IconButton><ArrowBackIcon /></IconButton></Link>
                     <div className="username">
                         <h3>Detail</h3>
                     </div>
@@ -42,6 +52,9 @@ const TransactionDetail = ({ location }) => {
             </div>
             <Link to={{ pathname: "/add", transaction: { ...location.trans, status: "edit" } }}>
                 <button className="btn">Edit</button>
+            </Link>
+            <Link to="/">
+                <button className="btn" onClick={() => {deleteTransaction(_id); routeChange()}}>Delete</button>
             </Link>
         </div>
     );
