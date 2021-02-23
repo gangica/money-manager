@@ -1,27 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 import Header from './Header';
 import '../App.css';
 import IncomeExpenses from './IncomeExpenses';
 import TransactionList from './TransactionList';
+import { GlobalContext } from '../context/StateProvider';
 import { Link } from 'react-router-dom';
 
 const Main = () => {
-    const initTrans = {
-        status: "add",
-        name: "",
-        type: "income",
-        date: "",
-        category: "",
-        amount: 0
-    }
+    const { getTransactions } = useContext(GlobalContext);
+
+    useEffect(() => {
+        getTransactions()
+    }, [])
 
     return (
         <div className="container">
             <Header />
             <IncomeExpenses />
             <TransactionList />
-            <Link to={{ pathname: "/add", transaction: initTrans}}>
+            <Link to="/add">
                 <button className="btn">Add</button>
             </Link>
         </div>

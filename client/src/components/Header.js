@@ -7,19 +7,22 @@ import { GlobalContext } from '../context/StateProvider';
 
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
-import getMonthYear from '../dateUtils';
 
 const Header = () => {
-  const { filterTransaction, getTransactions } = useContext(GlobalContext);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const { setGlobalDate, getTransactions } = useContext(GlobalContext);
+  const [localDate, setLocalDate] = useState(new Date());
   
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    setLocalDate(date);
   }
 
   useEffect(() => {
-    filterTransaction(selectedDate.toDateString());
+    setGlobalDate(localDate.toDateString());
   }, [])
+
+  useEffect(() => {
+    getTransactions();
+  }, [setGlobalDate])
 
   return (
     <div className="sidebar">
@@ -42,12 +45,12 @@ const Header = () => {
               variant="inline"
               openTo="year"
               views={["year", "month"]}
-              value={selectedDate}
+              value={localDate}
               onChange={handleDateChange}
             />
           </MuiPickersUtilsProvider>
         </div>
-        <FilterListIcon onClick={() => {filterTransaction(selectedDate); getTransactions()}}/>
+        <FilterListIcon onClick={() => setGlobalDate(localDate)}/>
       </div>
     </div>
   );

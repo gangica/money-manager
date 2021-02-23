@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const initialState = {
     transactions: [],
-    filterDate: false,
+    filterDate: null,
     dataToShow: []
 }
 
@@ -23,13 +23,11 @@ export const StateProvider = ({ children }) => {
         } catch(error) {
             console.log('error');
         }
-
     }
 
     async function deleteTransaction(id) {
         try {
             await axios.delete(`/api/v1/transactions/${id}`);
-
             dispatch({
                 type: 'DELETE_TRANS',
                 payload: id
@@ -37,18 +35,15 @@ export const StateProvider = ({ children }) => {
         } catch(error) {
             console.log('error remove');
         }
-        
     }
 
     async function addTransaction(transaction) {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        const headers = {
+            'Content-Type': 'application/json'
         }
 
         try {
-            const res = await axios.post('/api/v1/transactions', transaction, config);
+            const res = await axios.post('/api/v1/transactions', transaction, headers);
             dispatch({
                 type: 'ADD_TRANS',
                 payload: res.data.data
@@ -56,13 +51,11 @@ export const StateProvider = ({ children }) => {
         } catch(error) {
             console.log('error add');
         }
-        
     }
 
     async function editTransaction(id, transaction) {
         try {
             const res = await axios.put(`/api/v1/transactions/${id}`, transaction);
-
             dispatch({
                 type: 'UPDATE_TRANS',
                 payload: { id: id, data: res.data.data }
@@ -72,15 +65,15 @@ export const StateProvider = ({ children }) => {
         }
     }
 
-    function filterTransaction(date) {
+    function setGlobalDate(date) {
         dispatch({
-            type: 'FILTER_TRANS',
+            type: 'FILTER_DATE',
             payload: date
         })
     }
 
     return (
-        <GlobalContext.Provider value={{transactions, dataToShow, deleteTransaction, addTransaction, getTransactions, editTransaction, filterTransaction}}>
+        <GlobalContext.Provider value={{transactions, dataToShow, deleteTransaction, addTransaction, getTransactions, editTransaction, setGlobalDate}}>
             {children}
         </GlobalContext.Provider>
     )

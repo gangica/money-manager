@@ -1,15 +1,18 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { IconButton } from '@material-ui/core';
+import { formatDate } from "../context/utils";
+import axios from 'axios';
 
 const TransactionDetail = ({ location }) => {
-    const { name, amount, type, category, date } = location.trans;
+    const { transactionId } = location.state;
+    const [transaction, setTransaction] = useState(null);
 
-    const formatDate = (date) => {
-        let f = new Date(date);
-        return f.toLocaleDateString();
-    }
+    useEffect(() => {
+        axios.get(`/api/v1/transactions/${transactionId}`)
+        .then(res => setTransaction(res.data.data))
+    }, [])
 
     return (
         <div className="container">
@@ -31,17 +34,17 @@ const TransactionDetail = ({ location }) => {
                     <p>Date</p>
                     <p>Amount</p>
                 </div>
-                <div className="sidebarUser_name">
-                    <h4>{name}</h4>
-                    <p>{type}</p>
-                    <p>{category}</p>
-                    <p>{formatDate(date)}</p>
-                    <p>{amount}</p>
-                </div>
+                {transaction && <div className="sidebarUser_name">
+                    <h4>{transaction.name}</h4>
+                    <p>{transaction.type}</p>
+                    <p>{transaction.category}</p>
+                    <p>{formatDate(transaction.date)}</p>
+                    <p>{transaction.amount}</p>
+                </div>}
 
             </div>
-            <Link to={{ pathname: "/add", transaction: { ...location.trans, status: "edit" } }}>
-                <button className="btn">Edit</button>
+            <Link to={{ pathname: "/update", state: { transactionId: transactionId } }}>
+                <button className="btn">Update</button>
             </Link>
         </div>
     );
