@@ -1,56 +1,35 @@
-import React, { useContext, useState, useEffect } from 'react';
-import PieChartIcon from '@material-ui/icons/PieChart';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import { IconButton } from '@material-ui/core';
-import { GlobalContext } from '../context/StateProvider';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import "../css/Header.css"
 
-import DateFnsUtils from "@date-io/date-fns";
-import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns"
+import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers"
+import AssessmentIcon from '@material-ui/icons/Assessment'
+import HomeIcon from '@material-ui/icons/Home'
+import MoreVertIcon from '@material-ui/icons/MoreVert'
+import { IconButton } from '@material-ui/core'
 
-const Header = () => {
-  const { setGlobalDate, getTransactions } = useContext(GlobalContext);
-  const [localDate, setLocalDate] = useState(new Date());
-  
-  const handleDateChange = (date) => {
-    setLocalDate(date);
-  }
-
-  useEffect(() => {
-    setGlobalDate(localDate.toDateString());
-  }, [])
-
-  useEffect(() => {
-    getTransactions();
-  }, [setGlobalDate])
-
+const Header = ({ date, setDate }) => {
   return (
-    <div className="sidebar">
-      <div className="sidebar_header">
-        <div className="username">
-            <h3>Money Manager</h3>
-        </div>
-        <IconButton>
-          <PieChartIcon />
-        </IconButton>
-        <IconButton>
-          <MoreVertIcon />
-        </IconButton>
+    <div className="header">
+      <div className="header__container">
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <DatePicker
+            variant="inline"
+            openTo="year"
+            views={["year", "month"]}
+            value={date}
+            onChange={d => setDate(d)}
+          />
+        </MuiPickersUtilsProvider>
       </div>
-
-      <div className="sidebar_search">
-        <div className="sidebar_searchContainer">
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <DatePicker
-              variant="inline"
-              openTo="year"
-              views={["year", "month"]}
-              value={localDate}
-              onChange={handleDateChange}
-            />
-          </MuiPickersUtilsProvider>
-        </div>
-        <FilterListIcon onClick={() => setGlobalDate(localDate)}/>
+      <div className="icons__container">
+        {window.location.pathname === "/report" ? (<Link to="/">
+          <IconButton><HomeIcon /></IconButton>
+        </Link>) : (<Link to="/report">
+          <IconButton><AssessmentIcon /></IconButton>
+        </Link>)}
+        <IconButton><MoreVertIcon /></IconButton>
       </div>
     </div>
   );

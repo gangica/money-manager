@@ -1,0 +1,32 @@
+.list__container {
+    background: white;
+    border-radius: 5px;
+    margin: 0 20px;
+}
+
+.list__container > h4 {
+    padding: 20px;
+    font-size: 14px;
+    margin: 0
+}
+
+.list__container > h3 {
+    padding: 0px 20px 20px 20px;
+    font-size: 14px;
+    margin: 0;
+    text-align: center;
+}
+
+.list__container button {
+    font-size: smaller;
+    color: #b1b1b1
+}
+
+.list__container svg {
+    margin: auto 0;
+    margin-right: 15px;
+}
+
+.list__container svg path {
+    fill: #404040;
+}

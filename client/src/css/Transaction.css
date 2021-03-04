@@ -1,0 +1,43 @@
+.transaction__item {
+    background-color: #fff;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid #f6f6f6;
+}
+
+.transaction__item:hover {
+    background-color: #ebebeb;
+}
+
+.transaction__item > span {
+    padding: 10px 0
+}
+
+.transaction__item > * {
+    display: flex;
+    width: 100%;
+}
+
+.transaction__info {
+    width: 100%;
+    font-size: smaller;
+}
+
+.transaction__info > h4 {
+    margin: 5px 0;
+}
+
+.transaction__info > p {
+    margin: 5px 0;
+    font-size: smaller;
+    color: #9a9696;
+}
+
+.right {
+    text-align: end;
+}

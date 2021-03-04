@@ -1,29 +1,21 @@
-import React, { useContext } from 'react';
-import { GlobalContext } from '../context/StateProvider';
-import Balance from './Balance';
+import React from 'react'
+import { formatMoney, totalExpense, totalIncome } from '../context/utils'
+import '../css/IncomeExpenses.css'
 
-const IncomeExpenses = () => {
-  const { dataToShow } = useContext(GlobalContext);
-
-  const income = dataToShow.filter(transaction => transaction.type === "income")
-      .map(transaction => transaction.amount)
-      .reduce((first, next) => (first += next), 0).toFixed(1);
-
-  const expense = dataToShow.filter(transaction => transaction.type === "expense")
-      .map(transaction => transaction.amount)
-      .reduce((first, next) => (first += next), 0).toFixed(1);
+const IncomeExpenses = ({ data }) => {
+  const income = totalIncome(data);
+  const expense = totalExpense(data);
 
   return (
-    <div className="inc-exp-container">
-      <div>
-          <h5>Income</h5>
-          <p id="money-plus" className="money plus">+{income}</p>
+    <div className="balance">
+      <div className="expenses">
+        <h4>Expenses</h4>
+        <h1>{formatMoney(expense)}<span>đ</span></h1>
       </div>
-      <div>
-          <h5>Expense</h5>
-          <p id="money-minus" className="money minus">{expense}</p>
+      <div className="expenses">
+        <h4>Income</h4>
+        <h1>{formatMoney(income)}<span>đ</span></h1>
       </div>
-      <Balance />
     </div>
   );
 }

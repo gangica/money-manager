@@ -76,7 +76,7 @@ exports.deleteTransactions = async (req, res, next) => {
 }
 
 // Edit transaction
-exports.editTransaction = async (req, res, next) => {
+exports.updateTransaction = async (req, res, next) => {
     try {
         const transaction = await Transaction.findById(req.params.id);
 

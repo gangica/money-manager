@@ -1,0 +1,18 @@
+.expenses {
+    padding: 10px 0;
+    font-size: small;
+    width: 100%
+}
+
+.expenses > h4 {
+    margin: 5px 0;
+    font-weight: lighter;
+}
+
+.expenses > h1 {
+    font-weight: bolder;
+}
+
+.expenses span, .transaction__info span {
+    font-size: small;
+}

@@ -1,27 +1,27 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { GlobalContext } from '../context/StateProvider';
-import TextField from "@material-ui/core/TextField";
-import MenuItem from '@material-ui/core/MenuItem';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { IconButton } from '@material-ui/core';
-import { formatAmount } from '../context/utils';
+import React, { useState, useContext } from 'react'
+import { GlobalContext } from '../context/StateProvider'
+import { Link } from 'react-router-dom'
+import { formatAmount, lookUpIcon } from '../context/utils'
+import Popup from './Popup'
+import '../css/FormType.css'
 
-const Add = () => {
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
+import CreateIcon from '@material-ui/icons/Create'
+import LabelIcon from '@material-ui/icons/Label'
+import EventNoteIcon from '@material-ui/icons/EventNote'
+
+const Add = ({ location }) => {
+    const [success, setSuccess] = useState(false); 
     const { addTransaction } = useContext(GlobalContext);
-    const [transaction, setTransaction] = useState(null);
+    const [transaction, setTransaction] = useState({
+        type: location.state.type,
+        category: location.state.category,
+        name: null,
+        date: null,
+        amount: 0
+    });
 
-    const types = [
-        {
-            value: 'income',
-            label: 'Income'
-        },
-        {
-            value: 'expense',
-            label: 'Expense'
-        }
-    ]
-
-    const sendTransaction = (e) => {
+    const submit = (e) => {
         e.preventDefault();
 
         setTransaction({
@@ -31,50 +31,54 @@ const Add = () => {
 
         addTransaction(transaction);
 
-        // setTransaction(null);
+        setSuccess(true);
     }
-
+    
     return (
         <div className="container">
-            <div className="sidebar">
-                <div className="sidebar_header">
-                    <div className="username">
+            <div className="main__header">
+                <div className="title">
+                    <Link to="/type"><ArrowBackIcon /></Link>
+                    <div className="title__name">
                         <h3>Add Transaction</h3>
                     </div>
-                    <IconButton>
-                        <MoreVertIcon />
-                    </IconButton>
                 </div>
             </div>
-            <form onSubmit={e => sendTransaction(e)}>
-                <div className="form-control">
-                    <TextField select label="Type"
-                    onChange={e => setTransaction({...transaction, type: e.target.value})}>
-                        {types.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                                {option.label}
-                            </MenuItem>
-                        ))}
-                    </TextField>
+            {!success ? (<form className="form" onSubmit={e => submit(e)}>
+                <div className="form__amount">
+                    {lookUpIcon(location.state.type, location.state.category)}
+                    <div className="expenses">
+                        <h4>Amount</h4>
+                        <div className="amount">
+                            <span>đ</span>
+                            <input
+                                type="number"
+                                className="form__field"
+                                placeholder="0"
+                                step="100"
+                                onChange={e => setTransaction({ ...transaction, amount: e.target.value })}
+                                required />
+                        </div>
+                    </div>
                 </div>
-                <div className="form-control">
-                    <TextField label="Category"
-                    onChange={e => setTransaction({...transaction, category: e.target.value})} />
+                <div className="form__container">
+                    <div className="form__info">
+                        <h4>{transaction.type.toUpperCase()} - {transaction.category}</h4>
+                        <span><Link to="/type"><CreateIcon /></Link></span>
+                    </div>
+                    <div className="form__info">
+                        <LabelIcon />
+                        <input className="form__field" placeholder="Name"
+                            onChange={e => setTransaction({ ...transaction, name: e.target.value })} required />
+                    </div>
+                    <div className="form__info">
+                        <EventNoteIcon />
+                        <input className="form__field" placeholder="Date" type="date"
+                            onChange={e => setTransaction({ ...transaction, date: e.target.value })} required />
+                    </div>
                 </div>
-                <div className="form-control">
-                    <TextField label="Name"
-                    onChange={e => setTransaction({...transaction, name: e.target.value})} />
-                </div>
-                <div className="form-control">
-                    <TextField type="date" label="Date"
-                    onChange={e => setTransaction({...transaction, date: e.target.value})} />
-                </div>
-                <div className="form-control">
-                    <TextField label="Amount"
-                    onChange={e => setTransaction({...transaction, amount: e.target.value})} />
-                </div>
-                <button className="btn">Add</button>
-            </form>
+                <div className="add_btn2"><button className="btn">Add</button></div>
+            </form>) : (<Popup />)}
         </div>
     );
 }

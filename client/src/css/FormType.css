@@ -1,0 +1,155 @@
+.form__info svg path {
+    fill: #9a9696;
+}
+
+.form__container {
+    background: white;
+    border-radius: 5px;
+    margin: 0 20px;
+    padding: 15px 0;
+}
+
+.form__container h4 {
+    padding-bottom: 10px;
+    font-size: 14px;
+    margin: 0
+}
+
+.form__info > img {
+    height: 25px;
+    margin: auto 0;
+    padding-right: 15px;
+}
+
+.form__amount {
+    display: flex;
+    color: white;
+    margin: 0 20px 10px;
+
+}
+
+.form__amount svg {
+    margin: auto 0;
+    margin-right: 20px;
+    font-size: 40px;
+}
+
+.form__info svg {
+    font-size: 20px;
+    margin: auto 0;
+    margin-right: 10px;
+}
+
+.form__info > span {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+input {
+    outline: 0;
+    font-family: inherit;
+    color: #404040;
+}
+
+.form__field {
+    padding: .5rem 0;
+    background: 0 0;
+    border: none;
+    border-bottom-color: black;
+    border-bottom: 1px solid;
+    width: 100%;
+}
+
+.form__info {
+    display: flex;
+    padding: 6px 20px;
+}
+
+.amount {
+    display: flex;
+}
+
+.amount > span {
+    align-self: center;
+    font-weight: bold;
+}
+
+.amount input {
+    border: none;
+    color: white;
+    text-align: left;
+    font-family: inherit;
+    font-size: x-large;
+    font-weight: bold;
+    padding: 0 10px;
+}
+
+.type {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 20px;
+}
+
+.second-btn {
+    outline: 0;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    font-size: inherit;
+    margin: 10px 5px;
+    padding: 10px;
+    width: 100%;
+    font-weight: bold;
+    font-family: inherit;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.active, .second-btn:hover {
+    background-color: white;
+    color: #404040;
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+.grid__container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(25px, 1fr));
+    margin: 20px;
+    text-align: center;
+    color: white;
+    font-family: inherit;
+    font-size: 12px;
+    row-gap: 20px;
+    align-items: center;
+}
+
+#type img {
+    height: 25px;
+    margin: auto 0;
+}
+
+#type p {
+    margin: 5px;
+    color: white
+}
+
+.icons {
+    height: 13px;
+    margin-left: 10px;
+    color: #d8d8d8
+}
+
+.icons:hover, .grid__container li:hover {
+    cursor: pointer
+}
+
+.success {
+    padding: 20px 20px 10px 20px;
+    text-align: center;
+}
+
+.list2 {
+    list-style-type: none;
+    padding: 0;
+}

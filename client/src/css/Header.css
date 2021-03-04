@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  padding: 15px 0;
+  align-items: center;
+  text-align: center;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.header__container .MuiSvgIcon-root * {
+  fill: #404040;
+}
+
+.header__container .MuiSvgIcon-root {
+  margin: 0 10px;
+  cursor: pointer
+}
+
+.icons__container {
+    display: flex;
+    margin-left: 10px
+}

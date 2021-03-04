@@ -1,27 +1,38 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react'
+import { Link } from 'react-router-dom'
+import { GlobalContext } from '../context/StateProvider'
+import { filterTransaction } from '../context/utils'
 
-import Header from './Header';
-import '../App.css';
-import IncomeExpenses from './IncomeExpenses';
-import TransactionList from './TransactionList';
-import { GlobalContext } from '../context/StateProvider';
-import { Link } from 'react-router-dom';
+import Header from './Header'
+import TransactionList from './TransactionList'
+import IncomeExpenses from './IncomeExpenses'
 
 const Main = () => {
-    const { getTransactions } = useContext(GlobalContext);
+    const { transactions, getTransactions } = useContext(GlobalContext);
+    const [date, setDate] = useState(new Date());
+    const [data, setData] = useState([]);
 
     useEffect(() => {
-        getTransactions()
+        if (!transactions.length) {
+            getTransactions()
+        }
+        
     }, [])
+
+    useEffect(() => {
+        setData(filterTransaction(transactions, date))
+    }, [date, transactions])
 
     return (
         <div className="container">
-            <Header />
-            <IncomeExpenses />
-            <TransactionList />
-            <Link to="/add">
-                <button className="btn">Add</button>
-            </Link>
+            <div className="main__header">
+                <Header date={date} setDate={setDate} />
+                <IncomeExpenses data={data} />
+                <div className="add_btn">
+                    <Link to="/type"><button className="btn">Add Transaction</button></Link>
+                </div>
+            </div>
+            <TransactionList data={data} />
         </div>
     );
 }

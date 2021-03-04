@@ -1,26 +1,27 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { GlobalContext } from '../context/StateProvider';
-import { Avatar } from '@material-ui/core';
-import { formatDate } from "../context/utils";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { formatDate, formatMoney, lookUpIcon } from "../context/utils"
+import '../css/Transaction.css'
 
 const Transaction = ({ transaction }) => {
-  const { name, date, amount, _id } = transaction; 
-  const { deleteTransaction } = useContext(GlobalContext); 
+  const { type, name, category, date, amount, _id } = transaction;
 
   return (
-    <li className="sidebarUser">
+    <li className="transaction__item">
       <Link to={{
-        pathname: "/transaction",
+        pathname: "/update",
         state: { transactionId: _id }
       }}>
-        <div className="sidebarUser_name">
-          <h2>{name}</h2>
+        {lookUpIcon(type, category)}
+        <div className="transaction__info">
+          <h4>{name}</h4>
+          <p>{category}</p>
+        </div>
+        <div className="transaction__info right">
+          <h4>{formatMoney(amount)}<span>đ</span></h4>
           <p>{formatDate(date)}</p>
-          <p>description</p>
         </div>
       </Link>
-      <span className={amount > 0 ? "money plus" : "money minus"}>{amount}</span><button className="delete-btn" onClick={() => deleteTransaction(_id)}>x</button>
     </li>
   );
 }
