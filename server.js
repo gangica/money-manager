@@ -27,20 +27,6 @@ const connectDB = async () => {
 
 connectDB();
 
-if (process.env.NODE_ENV === 'development') {
-    // Exprees will serve up production assets
-    app.use(express.static('client/build'));
-
-    // Express serve up index.html file if it doesn't recognize route
-    app.get('/', (req, res) => {
-        res.sendFile(resolve(getTransactions, 'client/build/index.html'))
-    })
-    
-    app.get('/:id', (req, res) => {
-        res.sendFile(resolve(updateTransaction, 'client/build/index.html'))
-    })
-}
-
 // get transactions api from router
 app.use('/api/v1/transactions', transactions);
 
