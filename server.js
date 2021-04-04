@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const transactions = require('./routes/transactions');
 dotenv.config({ path: './config.env'});
+const { getTransactions, updateTransaction } = require('./controllers/transactions');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -27,14 +28,9 @@ const connectDB = async () => {
 connectDB();
 
 if (process.env.NODE_ENV === 'production') {
-    // Exprees will serve up production assets
-    app.use(express.static('client/build'));
-
     // Express serve up index.html file if it doesn't recognize route
-    const path = require('path');
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    });
+    app.get('/', getTransactions);
+    app.get('/:id', updateTransaction);
 }
 
 // get transactions api from router
