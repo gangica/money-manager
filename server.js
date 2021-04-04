@@ -3,7 +3,6 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const transactions = require('./routes/transactions');
 dotenv.config({ path: './config.env'});
-const { getTransactions, updateTransaction } = require('./controllers/transactions');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -26,6 +25,11 @@ const connectDB = async () => {
 }
 
 connectDB();
+
+if (process.env.NODE_ENV === 'development') {
+    // Exprees will serve up production assets
+    app.use(express.static('client/build'));
+}
 
 // get transactions api from router
 app.use('/api/v1/transactions', transactions);
