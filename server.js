@@ -26,11 +26,6 @@ const connectDB = async () => {
 
 connectDB();
 
-if (process.env.NODE_ENV === 'production') {
-    // Exprees will serve up production assets
-    app.use(express.static('client/build'));
-}
-
 // get transactions api from router
 app.use('/api/v1/transactions', transactions);
 
